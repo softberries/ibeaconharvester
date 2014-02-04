@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MenuTableViewController.h
 //  iBeaconHarvester
 //
 //  Created by Krzysztof Grajek on 31/01/14.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SWRevealViewController.h"
 
-@interface ViewController : UIViewController
+@interface MenuTableViewController : UITableViewController
 
 @end
