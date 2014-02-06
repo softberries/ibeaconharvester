@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IBeacon.h"
+#import "ESTBeaconManager.h"
 
 @implementation AppDelegate
 

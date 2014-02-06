@@ -25,15 +25,6 @@
 
 @implementation MapViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -42,22 +33,31 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSLog(@"found beacons: %d",[self.beacons count]);
     [self reloadData];
 }
 
--(IBeacon *)findIBeacon:(NSString *)uuid major:(int)major minor:(int)minor{
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uuid == %@ AND major == %d AND minor == %d", uuid, major, minor]];
-    NSArray *beaconsFound = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    if(beaconsFound){
-        return [beaconsFound objectAtIndex:0];
-    }else{
-        return nil;
-    }
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
+    
+    UIBarButtonItem * showMenuButton =
+    [[UIBarButtonItem alloc]
+     initWithTitle:@"||||" style:UIBarButtonItemStylePlain
+     target:self.revealViewController
+     action:@selector( revealToggle: ) ];
+    
+    self.navigationItem.leftBarButtonItem = showMenuButton ;
+    
+    //set up map
+    self.mapView.delegate = self;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
+/*
+ Puts all the iBeacons found in the database onto the mapview
+ */
 -(void)reloadData{
     for(int i = 0; i < [self.beacons count]; i++){
         NSManagedObject *beacon = [self.beacons objectAtIndex:i];
@@ -80,27 +80,9 @@
          ];
         [self.mapView addAnnotation:annotation];
     }
-    NSLog(@"Loading data: %d",[self.beacons count]);
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-    
-    UIBarButtonItem * showMenuButton =
-    [[UIBarButtonItem alloc]
-     initWithTitle:@"||||" style:UIBarButtonItemStylePlain
-     target:self.revealViewController
-     action:@selector( revealToggle: ) ];
-    
-    self.navigationItem.leftBarButtonItem = showMenuButton ;
-    
-    //set up map
-    self.mapView.delegate = self;
-    self.mapView.mapType = MKMapTypeStandard;
-    self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-}
+#pragma mark - MapView handling
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
@@ -113,16 +95,43 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     IBeaconAnnotation *annotationTapped = (IBeaconAnnotation *)view.annotation;
-    NSLog(@"tapped point on the map! %@",annotationTapped.uuid);
-    NSLog(@"found iBeacon: %@",[self findIBeacon:annotationTapped.uuid major:annotationTapped.major minor:annotationTapped.minor]);
     self.selectedBeacon = [self findIBeacon:annotationTapped.uuid major:annotationTapped.major minor:annotationTapped.minor];
+    [self performSegueWithIdentifier:@"iBeaconDetail" sender:view];
 }
+
+#pragma mark - Core Data
+
+/*
+ Find iBeacon in the database when the annotation is clicked on the map.
+ */
+-(IBeacon *)findIBeacon:(NSString *)uuid major:(int)major minor:(int)minor{
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uuid == %@ AND major == %d AND minor == %d", uuid, major, minor]];
+    NSArray *beaconsFound = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    if(beaconsFound){
+        return [beaconsFound objectAtIndex:0];
+    }else{
+        return nil;
+    }
+}
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+#pragma mark - Segue handling
 
 - (void) prepareForSegue: (UIStoryboardSegue *) segue sender: (id) sender
 {
     // configure the destination view controller:
-    if ( [segue.destinationViewController isKindOfClass: [BeaconDetailsViewController class]] &&
-        [sender isKindOfClass:[UITableViewCell class]] )
+    if ( [segue.destinationViewController isKindOfClass: [BeaconDetailsViewController class]])
     {
         BeaconDetailsViewController* cvc = segue.destinationViewController;
         if(self.selectedBeacon){
@@ -148,20 +157,6 @@
         };
     }
 }
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end

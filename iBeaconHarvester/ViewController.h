@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SWRevealViewController.h"
 
+/*
+ Front View Controller - the first one shown when the application is launched
+ */
 @interface ViewController : UIViewController
 
 @end

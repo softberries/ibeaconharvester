@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "BeaconListTableViewCell.h"
 #import "BeaconDetailsViewController.h"
+#import "IconUtils.h"
 #import <CoreData/CoreData.h>
 
 @interface AllBeaconsTableViewController () <NSFetchedResultsControllerDelegate>
@@ -22,15 +23,6 @@
 @end
 
 @implementation AllBeaconsTableViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        NSLog(@"initialized");
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -52,9 +44,12 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSLog(@"found beacons: %d",[self.beacons count]);
+    NSLog(@"found beacons: %lu",(unsigned long)[self.beacons count]);
     [self.tableView reloadData];
 }
+
+#pragma mark - Table View handling
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
@@ -105,28 +100,11 @@
     [cell.beaconCellNameLbl setText:[beacon valueForKey:@"name"]];
     [cell.beaconCellDistanceLbl setText:[NSString stringWithFormat:@"%0.2f m",distance]];
     [cell.beaconCellUUIDlbl setText:[beacon valueForKey:@"uuid"]];
-    cell.beaconCellImg.image = [self findImageByDistance:distance];
+    cell.beaconCellImg.image = [IconUtils findImageByDistance:distance];
     return cell;
 }
 
-- (UIImage *)findImageByDistance:(float)distance{
-    if(distance >= 20){
-        return [UIImage imageNamed:@"marker"];
-    }else if(distance >= 10 && distance < 20){
-        return [UIImage imageNamed:@"markerYellow"];
-    }else if(distance >= 1 && distance < 10){
-        return [UIImage imageNamed:@"markerPink"];
-    }else if(distance < 1){
-        return [UIImage imageNamed:@"markerRed"];
-    }else{
-        return [UIImage imageNamed:@"marker"];
-    }
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Core Data
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -137,6 +115,8 @@
     }
     return context;
 }
+
+#pragma mark - Seque handling
 
 - (void) prepareForSegue: (UIStoryboardSegue *) segue sender: (id) sender
 {
@@ -166,5 +146,4 @@
         };
     }
 }
-
 @end

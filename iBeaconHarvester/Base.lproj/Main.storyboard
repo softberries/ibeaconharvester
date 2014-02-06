@@ -207,6 +207,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="rjv-Bu-3qC" id="tpT-P3-BXC"/>
+                        <segue destination="nbR-uB-24Z" kind="custom" identifier="iBeaconDetail" customClass="SWRevealViewControllerSegue" id="kHg-rk-X3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8cl-9X-joC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -224,12 +225,48 @@
                     <view key="view" contentMode="scaleToFill" id="fmY-5J-zZD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bwr-QG-lFD">
+                                <rect key="frame" x="119" y="109" width="82" height="82"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="owB-F6-bWY">
+                                <rect key="frame" x="20" y="212" width="285" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">The iBeacon Harvester is a POC (Proof of Concept) kind of application which will help you find and save information about iBeacons around you. If you have any questions or suggestions regarding this aplication please contact me through Twitter or my personal blog.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="www.png" translatesAutoresizingMaskIntoConstraints="NO" id="H5x-X0-zpy">
+                                <rect key="frame" x="143" y="399" width="35" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="twitter_standing.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ahd-fr-RpE">
+                                <rect key="frame" x="140" y="325" width="40" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="softwarepassion.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6A-hj-NsQ">
+                                <rect key="frame" x="88" y="440" width="144" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@grajo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8q4-la-vTL">
+                                <rect key="frame" x="142" y="370" width="41" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wgs-rb-sAX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="421" y="-1275"/>
+            <point key="canvasLocation" x="529" y="-1575"/>
         </scene>
         <!--All Beacons Table View Controller - iBeacon List-->
         <scene sceneID="GAY-HX-fiR">
@@ -301,7 +338,7 @@
         <!--View Controller - Radar-->
         <scene sceneID="TYi-F1-FF4">
             <objects>
-                <viewController title="Radar" id="Xl9-Gz-szg" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="radar" title="Radar" id="Xl9-Gz-szg" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="85v-vp-u2T"/>
                         <viewControllerLayoutGuide type="bottom" id="sPg-3N-4HH"/>
@@ -400,7 +437,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzJ-hs-gIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1059" y="447"/>
+            <point key="canvasLocation" x="1757" y="259"/>
         </scene>
         <!--Beacon Details View Controller - iBeacon Details-->
         <scene sceneID="aVN-mQ-YHk">
@@ -566,7 +603,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oeP-9o-B0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1559" y="-470"/>
+            <point key="canvasLocation" x="1815" y="-946"/>
         </scene>
         <!--Navigation Controller - Radar-->
         <scene sceneID="KDj-TQ-NMs">
@@ -588,11 +625,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppIcon.png" width="256" height="256"/>
         <image name="Database.png" width="128" height="128"/>
         <image name="Map.png" width="128" height="128"/>
         <image name="Radar.png" width="128" height="128"/>
         <image name="ibeaconharvester58.png" width="58" height="58"/>
         <image name="marker.png" width="128" height="128"/>
+        <image name="twitter_standing.png" width="48" height="48"/>
+        <image name="www.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

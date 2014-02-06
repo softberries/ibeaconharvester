@@ -55,6 +55,10 @@
 		01547B0418A06E6000329199 /* ibeaconharvester640.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0218A06E6000329199 /* ibeaconharvester640.png */; };
 		01547B0518A06E6000329199 /* ibeaconharvester1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0318A06E6000329199 /* ibeaconharvester1136.png */; };
 		01547B0918A0D39200329199 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0818A0D39200329199 /* MBProgressHUD.m */; };
+		01547B0B18A17F2200329199 /* www.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0A18A17F2200329199 /* www.png */; };
+		01547B0D18A17FE700329199 /* twitter_standing.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0C18A17FE700329199 /* twitter_standing.png */; };
+		01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0E18A3A52800329199 /* ViewControllerTestTests.m */; };
+		01547B1318A3AC7A00329199 /* IconUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B1218A3AC7A00329199 /* IconUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +142,11 @@
 		01547B0318A06E6000329199 /* ibeaconharvester1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibeaconharvester1136.png; sourceTree = "<group>"; };
 		01547B0718A0D39200329199 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		01547B0818A0D39200329199 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		01547B0A18A17F2200329199 /* www.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = www.png; sourceTree = "<group>"; };
+		01547B0C18A17FE700329199 /* twitter_standing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_standing.png; sourceTree = "<group>"; };
+		01547B0E18A3A52800329199 /* ViewControllerTestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTestTests.m; sourceTree = "<group>"; };
+		01547B1118A3AC7A00329199 /* IconUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconUtils.h; sourceTree = "<group>"; };
+		01547B1218A3AC7A00329199 /* IconUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +219,7 @@
 		01547A2C189C35E600329199 /* iBeaconHarvester */ = {
 			isa = PBXGroup;
 			children = (
+				01547B1018A3AC4700329199 /* Utils */,
 				01547B0618A0D38400329199 /* MBProgressHUD */,
 				01547AE918A060B400329199 /* MapAnnotations */,
 				01547AA218A03C3200329199 /* iBeaconHarvester.xcdatamodeld */,
@@ -228,6 +238,8 @@
 		01547A2D189C35E600329199 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01547B0C18A17FE700329199 /* twitter_standing.png */,
+				01547B0A18A17F2200329199 /* www.png */,
 				01547B0218A06E6000329199 /* ibeaconharvester640.png */,
 				01547B0318A06E6000329199 /* ibeaconharvester1136.png */,
 				01547B0018A06BB900329199 /* About.png */,
@@ -257,6 +269,7 @@
 			children = (
 				01547A51189C35E600329199 /* iBeaconHarvesterTests.m */,
 				01547A4C189C35E600329199 /* Supporting Files */,
+				01547B0E18A3A52800329199 /* ViewControllerTestTests.m */,
 			);
 			path = iBeaconHarvesterTests;
 			sourceTree = "<group>";
@@ -352,6 +365,15 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		01547B1018A3AC4700329199 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				01547B1118A3AC7A00329199 /* IconUtils.h */,
+				01547B1218A3AC7A00329199 /* IconUtils.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,6 +461,8 @@
 				01547A9B189FC54900329199 /* markerYellow.png in Resources */,
 				01547A78189CD31800329199 /* Radar.png in Resources */,
 				01547AF818A0682B00329199 /* ibeaconharvester120.png in Resources */,
+				01547B0D18A17FE700329199 /* twitter_standing.png in Resources */,
+				01547B0B18A17F2200329199 /* www.png in Resources */,
 				01547B0118A06BB900329199 /* About.png in Resources */,
 				01547A99189FC54900329199 /* markerPink.png in Resources */,
 				01547A72189CD2D400329199 /* Map.png in Resources */,
@@ -473,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01547B1318A3AC7A00329199 /* IconUtils.m in Sources */,
 				01547AEC18A060DA00329199 /* IBeaconAnnotation.m in Sources */,
 				01547A3D189C35E600329199 /* ViewController.m in Sources */,
 				01547A7E189F99E200329199 /* BeaconListTableViewCell.m in Sources */,
@@ -495,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */,
 				01547A52189C35E600329199 /* iBeaconHarvesterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

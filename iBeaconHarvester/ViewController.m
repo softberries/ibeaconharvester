@@ -12,12 +12,12 @@
 #import "BeaconDetailsViewController.h"
 #import "MBProgressHUD.h"
 #import "IBeacon.h"
+#import "IconUtils.h"
 #import <CoreData/CoreData.h>
 
 @interface ViewController ()<ESTBeaconManagerDelegate, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *nrOfBeaconsLbl;
 @property (weak, nonatomic) IBOutlet UITableView *beaconsListTableView;
-
 @property (nonatomic, strong) ESTBeaconManager* beaconManager;
 @property (nonatomic, copy) NSArray* beacons;
 @property (nonatomic) MBProgressHUD *hud;
@@ -25,6 +25,7 @@
 //core data
 @property (nonatomic, strong) NSFetchedResultsController *frc;
 @property (strong) NSMutableArray *dbBeacons;
+//all entities copied to dictionary for fast access
 @property (nonatomic) NSMutableDictionary *beaconDict;
 
 @end
@@ -44,15 +45,17 @@
     self.beaconManager.avoidUnknownStateBeacons = YES;
     
     ESTBeaconRegion *region = [[ESTBeaconRegion alloc] initRegionWithIdentifier:@"iBeaconHarvesterRegion"];
+    
     // start looking for estimote beacons in region
     // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
     [self.beaconManager startRangingBeaconsInRegion:region];
+    [self.beaconManager requestStateForRegion:region];
     
     //register current class as delegate and data source for the table view
     [self.beaconsListTableView setDelegate:self];
     [self.beaconsListTableView setDataSource:self];
     
-    
+    //add menu bar button
     UIBarButtonItem * showMenuButton =
     [[UIBarButtonItem alloc]
      initWithTitle:@"||||" style:UIBarButtonItemStylePlain
@@ -62,7 +65,7 @@
     self.navigationItem.leftBarButtonItem = showMenuButton ;
     self.title = @"Radar";
     
-    
+    //show HUD
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
 	[self.view addSubview:self.hud];
 	
@@ -82,60 +85,58 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSLog(@"beacons in db: %d",[self.beacons count]);
     [self populateBeaconNames];
 }
 
--(void)populateBeaconNames{
-    self.beaconDict = [[NSMutableDictionary alloc] init];
-    for(int i = 0; i < [self.beacons count]; i++){
-        NSManagedObject *beacon = [self.beacons objectAtIndex:i];
-        NSString *key = [NSString stringWithFormat:@"%@--%@--%@",
-                         [beacon valueForKey:@"uuid"],
-                         [[beacon valueForKey:@"major"] stringValue],
-                         [[beacon valueForKey:@"minor"] stringValue]];
-        NSLog(@"Key: %@ , Value: %@",key,[beacon valueForKey:@"name"]);
-        [self.beaconDict setObject:[beacon valueForKey:@"name"] forKey:key];
-    }
-}
-
--(NSString *)findBeaconName:(NSString *)uuid major:(int)major minor:(int)minor{
-    NSString *key = [NSString stringWithFormat:@"%@--%d--%d",uuid, major, minor];
-    NSLog(@"Finding beacon: %@", key);
-    NSLog(@"found: %@",[self.beaconDict objectForKey:key]);
-    return [self.beaconDict objectForKey:key];
-}
-
-/*
- B9407F30-F5F8-466E-AFF9-25556B57FE6D--5728--54971 , Value: estimote
- B9407F30-F5F8-466E-AFF9-25556B57FE6D--5728--54971 , Value: estimote
- B9407F30-F5F8-466E-AFF9-25556B57FE6D--2784--56774 , Value: estimote
- 
- B9407F30-F5F8-466E-AFF9-25556B57FE6D--2784--56774
- 
- */
-
-- (void)showLoader {
-	// This just increases the progress indicator in a loop
-	float progress = 0.0f;
-	while (progress < 1.0f) {
-		progress += 0.01f;
-		self.hud.progress = progress;
-		usleep(5000);
-	}
-    //end of HUD
-}
+#pragma mark - iBeacon related methods
 
 -(void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
 {
     self.beacons = beacons;
-    int size = [beacons count];
-    NSLog(@"There are %d beacons in the array", size);
-    NSString *noBStr = [NSString stringWithFormat:@"%d", size];
+    unsigned long size = [beacons count];
+    NSString *noBStr = [NSString stringWithFormat:@"%lu", size];
     [self.nrOfBeaconsLbl setText:noBStr];
     [self.beaconsListTableView reloadData];
 }
-#pragma mark - Table view data source
+-(void)beaconManager:(ESTBeaconManager *)manager
+      didEnterRegion:(ESTBeaconRegion *)region
+{
+    NSLog(@"didEnterRegion: %lu",(unsigned long)[self.beacons count]);
+    //NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
+    // present local notification
+    for(int i=0;i<[self.beacons count];i++){
+        ESTBeacon *closestBeacon = [self.beacons objectAtIndex:i];
+        NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
+        if(!name){
+            UILocalNotification *notification = [[UILocalNotification alloc] init];
+            notification.alertBody = @"Unknown iBeacon found";
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        }
+    }
+}
+-(void)beaconManager:(ESTBeaconManager *)manager didExitRegion:(ESTBeaconRegion *)region{
+    [manager stopMonitoringForRegion:region];
+}
+
+-(void) beaconManager:(ESTBeaconManager *)manager didDetermineState:(CLRegionState)state forRegion:(ESTBeaconRegion *)region{
+    [manager startMonitoringForRegion:region];
+}
+
+
+#pragma mark - Core Data related methods
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+#pragma mark - Table related methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -158,39 +159,28 @@
     if (cell == nil) {
         cell = [[BeaconListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    ESTBeacon *closestBeacon = [self.beacons objectAtIndex:indexPath.row];
-    float distance = closestBeacon.distance.floatValue;
-    cell.beaconCellImg.image = [self findImageByDistance:distance];
-    NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
-    if(name){
-        cell.beaconCellNameLbl.text = name;
+    if([self.beacons count] > 0){
+        ESTBeacon *closestBeacon = [self.beacons objectAtIndex:indexPath.row];
+        float distance = closestBeacon.distance.floatValue;
+        cell.beaconCellImg.image = [IconUtils findImageByDistance:distance];
+        NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
+        if(name){
+            cell.beaconCellNameLbl.text = name;
+        }
+        cell.beaconCellUUIDlbl.text = @"Unknown";
+        cell.beaconCellDistanceLbl.text = [NSString stringWithFormat:@"%.02f m",distance];
+        cell.beaconCellUUIDlbl.text = closestBeacon.proximityUUID.UUIDString;
     }
-    cell.beaconCellUUIDlbl.text = @"Unknown";
-    cell.beaconCellDistanceLbl.text = [NSString stringWithFormat:@"%.02f m",distance];
-    cell.beaconCellUUIDlbl.text = closestBeacon.proximityUUID.UUIDString;
     return cell;
 }
-
-- (UIImage *)findImageByDistance:(float)distance{
-    if(distance >= 20){
-        return [UIImage imageNamed:@"marker"];
-    }else if(distance >= 10 && distance < 20){
-        return [UIImage imageNamed:@"markerYellow"];
-    }else if(distance >= 1 && distance < 10){
-        return [UIImage imageNamed:@"markerPink"];
-    }else if(distance < 1){
-        return [UIImage imageNamed:@"markerRed"];
-    }else{
-        return [UIImage imageNamed:@"marker"];
-    }
-}
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return NO;
 }
+
+#pragma mark - Seque handling
 
 - (void) prepareForSegue: (UIStoryboardSegue *) segue sender: (id) sender
 {
@@ -223,19 +213,35 @@
         };
     }
 }
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
+
+#pragma mark - Utility methods
+
+-(void)populateBeaconNames{
+    self.beaconDict = [[NSMutableDictionary alloc] init];
+    for(int i = 0; i < [self.beacons count]; i++){
+        NSManagedObject *beacon = [self.beacons objectAtIndex:i];
+        NSString *key = [NSString stringWithFormat:@"%@--%@--%@",
+                         [beacon valueForKey:@"uuid"],
+                         [[beacon valueForKey:@"major"] stringValue],
+                         [[beacon valueForKey:@"minor"] stringValue]];
+        [self.beaconDict setObject:[beacon valueForKey:@"name"] forKey:key];
     }
-    return context;
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+-(NSString *)findBeaconName:(NSString *)uuid major:(int)major minor:(int)minor{
+    NSString *key = [NSString stringWithFormat:@"%@--%d--%d",uuid, major, minor];
+    return [self.beaconDict objectForKey:key];
+}
+
+- (void)showLoader {
+	// This just increases the progress indicator in a loop
+	float progress = 0.0f;
+	while (progress < 1.0f) {
+		progress += 0.01f;
+		self.hud.progress = progress;
+		usleep(5000);
+	}
+    //end of HUD
 }
 
 @end

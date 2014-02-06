@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+/*
+ Table cell used on the left-side menu
+ */
 @interface MenuTableCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *menuItemImg;
 @property (weak, nonatomic) IBOutlet UILabel *menuItemTitle;
 @property (weak, nonatomic) IBOutlet UILabel *menuItemSubtitle;
