@@ -52,6 +52,11 @@
     [self displayIBeaconInformation];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.navigationController.view setUserInteractionEnabled:NO];
+}
+
 #pragma mark - iBeacon manager handling code
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -69,11 +74,16 @@
     /* Failed to receive user's location */
 }
 
+- (void)beaconDidDisconnect:(ESTBeacon *)beacon withError:(NSError *)error{
+    NSLog(@"iBeacon disconnected!!!!");
+    [self.navigationController.view setUserInteractionEnabled:YES];
+}
 - (void)beaconConnectionDidFail:(ESTBeacon*)beacon withError:(NSError*)error{
     NSLog(@"iBeacon connection failed!");
     self.hud.labelText = @"iBeacon Connection Failed!";
     [self.saveBtn setEnabled:NO];
     [self.hud hide:YES afterDelay:3];
+    [self.navigationController.view setUserInteractionEnabled:YES];
 }
 
 - (void)beaconConnectionDidSucceeded:(ESTBeacon*)beacon{
@@ -92,6 +102,7 @@
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     [self showBeaconOnTheMap:self.selectedBeacon.peripheral.name dateStr:dateString];
+    [self.selectedBeacon disconnectBeacon];
 }
 
 
