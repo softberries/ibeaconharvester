@@ -21,6 +21,7 @@
 @property (nonatomic, strong) ESTBeaconManager* beaconManager;
 @property (nonatomic, copy) NSArray* beacons;
 @property (nonatomic) MBProgressHUD *hud;
+@property (strong) NSMutableArray *notifications;
 
 //core data
 @property (nonatomic, strong) NSFetchedResultsController *frc;
@@ -37,14 +38,16 @@
     [super viewDidLoad];
     [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-
     
     //iBeacon menager initialization
     self.beaconManager = [[ESTBeaconManager alloc] init];
     self.beaconManager.delegate = self;
     self.beaconManager.avoidUnknownStateBeacons = YES;
-    
-    ESTBeaconRegion *region = [[ESTBeaconRegion alloc] initRegionWithIdentifier:@"iBeaconHarvesterRegion"];
+   
+    ESTBeaconRegion *region = [[ESTBeaconRegion alloc]
+                            initWithProximityUUID:[[NSUUID alloc]
+                            initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"]
+                            identifier:@"iBeaconHarvesterRegion"];
     
     // start looking for estimote beacons in region
     // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
@@ -102,16 +105,31 @@
       didEnterRegion:(ESTBeaconRegion *)region
 {
     NSLog(@"didEnterRegion: %lu",(unsigned long)[self.beacons count]);
+    NSLog(@"Notifications size: %lu",(unsigned long)[self.notifications count]);
+    if(self.notifications == nil){
+        //initialize mutable array for storing notifications
+        NSLog(@"init array");
+        self.notifications = [[NSMutableArray alloc] init];
+    }
     //NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
     // present local notification
     for(int i=0;i<[self.beacons count];i++){
         ESTBeacon *closestBeacon = [self.beacons objectAtIndex:i];
         NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
-        if(!name){
-            UILocalNotification *notification = [[UILocalNotification alloc] init];
-            notification.alertBody = @"Unknown iBeacon found";
-            notification.soundName = UILocalNotificationDefaultSoundName;
-            [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        if(!self.notifications){
+            self.notifications = [[NSMutableArray alloc]init];
+        }
+        NSLog(@"Name: %@",name);
+        if(name == NULL){
+            NSString *newName = [NSString stringWithFormat:@"%@%@%@",closestBeacon.proximityUUID.UUIDString, closestBeacon.major, closestBeacon.minor];
+            NSLog(@"isView shown: %d",self.isViewLoaded && self.view.window);
+            if(![self.notifications containsObject:newName] && !(self.isViewLoaded && self.view.window.isHidden)){
+                [self.notifications addObject:(id)newName];
+                UILocalNotification *notification = [[UILocalNotification alloc] init];
+                notification.alertBody = @"Unknown iBeacon found";
+                notification.soundName = UILocalNotificationDefaultSoundName;
+                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+            }
         }
     }
 }
@@ -164,7 +182,7 @@
         float distance = closestBeacon.distance.floatValue;
         cell.beaconCellImg.image = [IconUtils findImageByDistance:distance];
         NSString *name = [self findBeaconName:closestBeacon.proximityUUID.UUIDString major:closestBeacon.major.intValue minor:closestBeacon.minor.intValue];
-        if(name){
+        if(name != nil){
             cell.beaconCellNameLbl.text = name;
         }
         cell.beaconCellUUIDlbl.text = @"Unknown";

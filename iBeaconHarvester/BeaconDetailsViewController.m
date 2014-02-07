@@ -48,13 +48,12 @@
      target:self.revealViewController
      action:@selector( revealToggle: ) ];
     self.navigationItem.leftBarButtonItem = showMenuButton;
-    
+     [self.navigationController.view setUserInteractionEnabled:NO];
     [self displayIBeaconInformation];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.navigationController.view setUserInteractionEnabled:NO];
 }
 
 #pragma mark - iBeacon manager handling code
@@ -136,6 +135,7 @@
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
     NSString *dateString = [formatter stringFromDate:[self.beaconFromDb valueForKey:@"dateAdded"]];
     [self showBeaconOnTheMap:self.nameTxt.text dateStr:dateString];
+    [self.navigationController.view setUserInteractionEnabled:YES];
 }
 /* called when the ibeacon given is from the database */
 -(void)displayIBeaconFromManager{

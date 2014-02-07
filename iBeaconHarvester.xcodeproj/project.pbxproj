@@ -35,7 +35,6 @@
 		01547A8B189FA3DF00329199 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A8A189FA3DF00329199 /* CoreLocation.framework */; };
 		01547A8D189FA3F600329199 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A8C189FA3F600329199 /* CoreBluetooth.framework */; };
 		01547A8F189FA43800329199 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A8E189FA43800329199 /* SystemConfiguration.framework */; };
-		01547A90189FA45D00329199 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A88189FA1C000329199 /* libEstimoteSDK.a */; };
 		01547A93189FAF3000329199 /* BeaconDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547A92189FAF3000329199 /* BeaconDetailsViewController.m */; };
 		01547A95189FC2A200329199 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547A94189FC2A200329199 /* marker.png */; };
 		01547A99189FC54900329199 /* markerPink.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547A96189FC54900329199 /* markerPink.png */; };
@@ -59,6 +58,7 @@
 		01547B0D18A17FE700329199 /* twitter_standing.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0C18A17FE700329199 /* twitter_standing.png */; };
 		01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0E18A3A52800329199 /* ViewControllerTestTests.m */; };
 		01547B1318A3AC7A00329199 /* IconUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B1218A3AC7A00329199 /* IconUtils.m */; };
+		01547B9618A5230600329199 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547B9518A5230600329199 /* libEstimoteSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,12 +109,6 @@
 		01547A7C189F99E200329199 /* BeaconListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconListTableViewCell.h; sourceTree = "<group>"; };
 		01547A7D189F99E200329199 /* BeaconListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconListTableViewCell.m; sourceTree = "<group>"; };
 		01547A7F189F9F8400329199 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEstimoteSDK.a; path = "../iOS-SDK/EstimoteSDK/libEstimoteSDK.a"; sourceTree = "<group>"; };
-		01547A83189FA1C000329199 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeacon.h; sourceTree = "<group>"; };
-		01547A84189FA1C000329199 /* ESTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconDefinitions.h; sourceTree = "<group>"; };
-		01547A85189FA1C000329199 /* ESTBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconManager.h; sourceTree = "<group>"; };
-		01547A86189FA1C000329199 /* ESTBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconRegion.h; sourceTree = "<group>"; };
-		01547A87189FA1C000329199 /* ESTBeaconUpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconUpdateInfo.h; sourceTree = "<group>"; };
-		01547A88189FA1C000329199 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEstimoteSDK.a; sourceTree = "<group>"; };
 		01547A8A189FA3DF00329199 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		01547A8C189FA3F600329199 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		01547A8E189FA43800329199 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -147,6 +141,12 @@
 		01547B0E18A3A52800329199 /* ViewControllerTestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTestTests.m; sourceTree = "<group>"; };
 		01547B1118A3AC7A00329199 /* IconUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconUtils.h; sourceTree = "<group>"; };
 		01547B1218A3AC7A00329199 /* IconUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconUtils.m; sourceTree = "<group>"; };
+		01547B9018A5230600329199 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeacon.h; sourceTree = "<group>"; };
+		01547B9118A5230600329199 /* ESTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconDefinitions.h; sourceTree = "<group>"; };
+		01547B9218A5230600329199 /* ESTBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconManager.h; sourceTree = "<group>"; };
+		01547B9318A5230600329199 /* ESTBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconRegion.h; sourceTree = "<group>"; };
+		01547B9418A5230600329199 /* ESTBeaconUpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconUpdateInfo.h; sourceTree = "<group>"; };
+		01547B9518A5230600329199 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEstimoteSDK.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,12 +155,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				01547A9D18A03BE400329199 /* CoreData.framework in Frameworks */,
-				01547A90189FA45D00329199 /* libEstimoteSDK.a in Frameworks */,
 				01547A8F189FA43800329199 /* SystemConfiguration.framework in Frameworks */,
 				01547A8D189FA3F600329199 /* CoreBluetooth.framework in Frameworks */,
 				01547A8B189FA3DF00329199 /* CoreLocation.framework in Frameworks */,
 				01547A6A189C537400329199 /* MapKit.framework in Frameworks */,
 				01547A29189C35E600329199 /* CoreGraphics.framework in Frameworks */,
+				01547B9618A5230600329199 /* libEstimoteSDK.a in Frameworks */,
 				01547A2B189C35E600329199 /* UIKit.framework in Frameworks */,
 				01547A27189C35E600329199 /* Foundation.framework in Frameworks */,
 			);
@@ -182,6 +182,7 @@
 		01547A1A189C35E600329199 = {
 			isa = PBXGroup;
 			children = (
+				01547B8E18A5230600329199 /* EstimoteSDK */,
 				01547A5B189C35F300329199 /* SWRevealViewController */,
 				01547A2C189C35E600329199 /* iBeaconHarvester */,
 				01547A4B189C35E600329199 /* iBeaconHarvesterTests */,
@@ -224,7 +225,6 @@
 				01547AE918A060B400329199 /* MapAnnotations */,
 				01547AA218A03C3200329199 /* iBeaconHarvester.xcdatamodeld */,
 				01547A9E18A03BFF00329199 /* Data */,
-				01547A81189FA1C000329199 /* EstimoteSDK */,
 				01547A5F189C360800329199 /* Views */,
 				01547A35189C35E600329199 /* AppDelegate.h */,
 				01547A36189C35E600329199 /* AppDelegate.m */,
@@ -316,28 +316,6 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		01547A81189FA1C000329199 /* EstimoteSDK */ = {
-			isa = PBXGroup;
-			children = (
-				01547A82189FA1C000329199 /* Headers */,
-				01547A88189FA1C000329199 /* libEstimoteSDK.a */,
-			);
-			name = EstimoteSDK;
-			path = "../../iOS-SDK/EstimoteSDK";
-			sourceTree = "<group>";
-		};
-		01547A82189FA1C000329199 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				01547A83189FA1C000329199 /* ESTBeacon.h */,
-				01547A84189FA1C000329199 /* ESTBeaconDefinitions.h */,
-				01547A85189FA1C000329199 /* ESTBeaconManager.h */,
-				01547A86189FA1C000329199 /* ESTBeaconRegion.h */,
-				01547A87189FA1C000329199 /* ESTBeaconUpdateInfo.h */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
 		01547A9E18A03BFF00329199 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +350,27 @@
 				01547B1218A3AC7A00329199 /* IconUtils.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		01547B8E18A5230600329199 /* EstimoteSDK */ = {
+			isa = PBXGroup;
+			children = (
+				01547B8F18A5230600329199 /* Headers */,
+				01547B9518A5230600329199 /* libEstimoteSDK.a */,
+			);
+			path = EstimoteSDK;
+			sourceTree = "<group>";
+		};
+		01547B8F18A5230600329199 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				01547B9018A5230600329199 /* ESTBeacon.h */,
+				01547B9118A5230600329199 /* ESTBeaconDefinitions.h */,
+				01547B9218A5230600329199 /* ESTBeaconManager.h */,
+				01547B9318A5230600329199 /* ESTBeaconRegion.h */,
+				01547B9418A5230600329199 /* ESTBeaconUpdateInfo.h */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -647,6 +646,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kris/Projects/iOS-SDK/EstimoteSDK",
+					/Users/kris/Projects/iBeaconHarvester/EstimoteSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -665,6 +665,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/kris/Projects/iOS-SDK/EstimoteSDK",
+					/Users/kris/Projects/iBeaconHarvester/EstimoteSDK,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -732,6 +733,7 @@
 				01547A57189C35E600329199 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01547A58189C35E600329199 /* Build configuration list for PBXNativeTarget "iBeaconHarvesterTests" */ = {
 			isa = XCConfigurationList;
@@ -740,6 +742,7 @@
 				01547A5A189C35E600329199 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
