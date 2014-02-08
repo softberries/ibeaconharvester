@@ -12,6 +12,8 @@
 #import "ESTBeaconManager.h"
 #import "MBProgressHUD.h"
 #import "IBeaconAnnotation.h"
+#import "IBeacon.h"
+#import "ESTBeacon.h"
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESTBeacon.h"
-#import "IBeacon.h"
+
+@class ESTBeacon;
+@class IBeacon;
 
 @interface BeaconDetailsViewController : UIViewController
 
