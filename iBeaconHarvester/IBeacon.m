@@ -21,5 +21,7 @@
 @dynamic batteryLevel;
 @dynamic advertisingInterval;
 @dynamic name;
+@dynamic dateAdded;
+@dynamic distance;
 
 @end

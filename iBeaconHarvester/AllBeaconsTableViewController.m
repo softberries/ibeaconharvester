@@ -94,12 +94,12 @@
         cell = [[BeaconListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     // Configure the cell...
-    NSManagedObject *beacon = [self.beacons objectAtIndex:indexPath.row];
-    float distance = [[beacon valueForKey:@"distance"] floatValue];
+    IBeacon *beacon = [self.beacons objectAtIndex:indexPath.row];
+    float distance = [beacon.distance floatValue];
 
-    [cell.beaconCellNameLbl setText:[beacon valueForKey:@"name"]];
+    [cell.beaconCellNameLbl setText:beacon.name];
     [cell.beaconCellDistanceLbl setText:[NSString stringWithFormat:@"%0.2f m",distance]];
-    [cell.beaconCellUUIDlbl setText:[beacon valueForKey:@"uuid"]];
+    [cell.beaconCellUUIDlbl setText:beacon.uuid];
     cell.beaconCellImg.image = [IconUtils findImageByDistance:distance];
     return cell;
 }

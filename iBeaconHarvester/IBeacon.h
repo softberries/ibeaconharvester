@@ -22,5 +22,7 @@
 @property (nonatomic, retain) NSNumber * batteryLevel;
 @property (nonatomic, retain) NSNumber * advertisingInterval;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSDate   * dateAdded;
+@property (nonatomic, retain) NSNumber * distance;
 
 @end

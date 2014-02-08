@@ -60,7 +60,7 @@
  */
 -(void)reloadData{
     for(int i = 0; i < [self.beacons count]; i++){
-        NSManagedObject *beacon = [self.beacons objectAtIndex:i];
+        IBeacon *beacon = [self.beacons objectAtIndex:i];
         double latitude = [[beacon valueForKey:@"latitude"] doubleValue];
         double longitude = [[beacon valueForKey:@"longitude"] doubleValue];
         if(latitude == 0 || longitude == 0){
@@ -72,11 +72,11 @@
         NSString *dateString = [formatter stringFromDate:[beacon valueForKey:@"dateAdded"]];
         IBeaconAnnotation *annotation =
         [[IBeaconAnnotation alloc] initWithCoordinates:location
-                                                 title:[beacon valueForKey:@"name"]
+                                                 title:beacon.name
                                               subTitle:dateString
-                                                  uuid:[beacon valueForKey:@"uuid"]
-                                                 major:[[beacon valueForKey:@"major"]intValue]
-                                                 minor:[[beacon valueForKey:@"minor"]intValue]
+                                                  uuid:beacon.uuid
+                                                 major:[beacon.major intValue]
+                                                 minor:[beacon.minor intValue]
          ];
         [self.mapView addAnnotation:annotation];
     }

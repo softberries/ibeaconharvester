@@ -117,23 +117,23 @@
 
 /* called when the ibeacon given is from the ibeaconmanager */
 -(void)displayIBeaconFromDatabase{
-    self.nameTxt.text = [self.beaconFromDb valueForKey:@"name"];
-    self.uuidLbl.text = [self.beaconFromDb valueForKey:@"uuid"];
-    self.majorNrLbl.text = [[self.beaconFromDb valueForKey:@"major"] stringValue];
-    self.minorNrLbl.text = [[self.beaconFromDb valueForKey:@"minor"]stringValue];
-    self.firmwareVerLbl.text = [self.beaconFromDb valueForKey:@"firmware"];
-    self.hardwareVerLbl.text = [self.beaconFromDb valueForKey:@"hardware"];
-    self.batteryLevelLbl.text = [NSString stringWithFormat:@"%@ %%",[[self.beaconFromDb valueForKey:@"batteryLevel"]stringValue]];
-    self.advIntervalLbl.text = [[self.beaconFromDb valueForKey:@"advertisingInterval"]stringValue];
+    self.nameTxt.text = self.beaconFromDb.name;
+    self.uuidLbl.text = self.beaconFromDb.uuid;
+    self.majorNrLbl.text = [self.beaconFromDb.major stringValue];
+    self.minorNrLbl.text = [self.beaconFromDb.minor stringValue];
+    self.firmwareVerLbl.text = self.beaconFromDb.firmware;
+    self.hardwareVerLbl.text = self.beaconFromDb.hardware;
+    self.batteryLevelLbl.text = [NSString stringWithFormat:@"%@ %%",[self.beaconFromDb.batteryLevel stringValue]];
+    self.advIntervalLbl.text = [self.beaconFromDb.advertisingInterval stringValue];
     [self.saveBtn setEnabled:NO];
     
     //set the map
-    self.latitude = [[self.beaconFromDb valueForKey:@"latitude"]doubleValue];
-    self.longitude = [[self.beaconFromDb valueForKey:@"longitude"]doubleValue];
+    self.latitude = [self.beaconFromDb.latitude doubleValue];
+    self.longitude = [self.beaconFromDb.longitude doubleValue];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];
-    NSString *dateString = [formatter stringFromDate:[self.beaconFromDb valueForKey:@"dateAdded"]];
+    NSString *dateString = [formatter stringFromDate:self.beaconFromDb.dateAdded];
     [self showBeaconOnTheMap:self.nameTxt.text dateStr:dateString];
     [self.navigationController.view setUserInteractionEnabled:YES];
 }
@@ -254,30 +254,30 @@
     IBeacon *bikon = [self findIBeacon:self.uuidLbl.text major:[self.majorNrLbl.text intValue] minor:[self.minorNrLbl.text intValue]];
     if(bikon){
         NSLog(@"saving existing object...");
-        [bikon setValue:[NSNumber numberWithDouble:self.latitude] forKey:@"latitude"];
-        [bikon setValue:[NSNumber numberWithDouble:self.longitude] forKey:@"longitude"];
-        [bikon setValue:self.hardwareVerLbl.text forKey:@"hardware"];
-        [bikon setValue:self.firmwareVerLbl.text forKey:@"firmware"];
-        [bikon setValue:[NSDate date] forKey:@"dateAdded"];
-        [bikon setValue:[NSNumber numberWithFloat:[self.batteryLevelLbl.text floatValue]] forKey:@"batteryLevel"];
-        [bikon setValue:[NSNumber numberWithInteger:[self.advIntervalLbl.text integerValue]] forKey:@"advertisingInterval"];
-        [bikon setValue:[NSNumber numberWithFloat:[self.selectedBeacon.distance floatValue]] forKey:@"distance"];
+        bikon.latitude = [NSNumber numberWithDouble:self.latitude];
+        bikon.longitude = [NSNumber numberWithDouble:self.longitude];
+        bikon.hardware = self.hardwareVerLbl.text;
+        bikon.firmware = self.firmwareVerLbl.text;
+        bikon.dateAdded = [NSDate date];
+        bikon.batteryLevel = [NSNumber numberWithFloat:[self.batteryLevelLbl.text floatValue]];
+        bikon.advertisingInterval = [NSNumber numberWithInteger:[self.advIntervalLbl.text integerValue]];
+        bikon.distance = [NSNumber numberWithFloat:[self.selectedBeacon.distance floatValue]];
     }else{
         // Create a new managed object
         NSLog(@"saving new object...");
-        NSManagedObject *newBeacon = [NSEntityDescription insertNewObjectForEntityForName:@"IBeacon" inManagedObjectContext:context];
-        [newBeacon setValue:self.uuidLbl.text forKey:@"uuid"];
-        [newBeacon setValue:self.nameTxt.text forKey:@"name"];
-        [newBeacon setValue:[NSNumber numberWithInteger:[self.minorNrLbl.text integerValue]] forKey:@"minor"];
-        [newBeacon setValue:[NSNumber numberWithInteger:[self.majorNrLbl.text integerValue]] forKey:@"major"];
-        [newBeacon setValue:[NSNumber numberWithDouble:self.latitude] forKey:@"latitude"];
-        [newBeacon setValue:[NSNumber numberWithDouble:self.longitude] forKey:@"longitude"];
-        [newBeacon setValue:self.hardwareVerLbl.text forKey:@"hardware"];
-        [newBeacon setValue:self.firmwareVerLbl.text forKey:@"firmware"];
-        [newBeacon setValue:[NSDate date] forKey:@"dateAdded"];
-        [newBeacon setValue:[NSNumber numberWithFloat:[self.batteryLevelLbl.text floatValue]] forKey:@"batteryLevel"];
-        [newBeacon setValue:[NSNumber numberWithInteger:[self.advIntervalLbl.text integerValue]] forKey:@"advertisingInterval"];
-        [newBeacon setValue:[NSNumber numberWithFloat:[self.selectedBeacon.distance floatValue]] forKey:@"distance"];
+        IBeacon *newBeacon = [NSEntityDescription insertNewObjectForEntityForName:@"IBeacon" inManagedObjectContext:context];
+        newBeacon.uuid = self.uuidLbl.text;
+        newBeacon.name = self.uuidLbl.text;
+        newBeacon.minor = [NSNumber numberWithInteger:[self.minorNrLbl.text integerValue]];
+        newBeacon.major = [NSNumber numberWithInteger:[self.majorNrLbl.text integerValue]];
+        newBeacon.latitude = [NSNumber numberWithDouble:self.latitude];
+        newBeacon.longitude = [NSNumber numberWithDouble:self.longitude];
+        newBeacon.firmware = self.firmwareVerLbl.text;
+        newBeacon.hardware = self.hardwareVerLbl.text;
+        newBeacon.dateAdded = [NSDate date];
+        newBeacon.batteryLevel = [NSNumber numberWithFloat:[self.batteryLevelLbl.text floatValue]];
+        newBeacon.advertisingInterval = [NSNumber numberWithInteger:[self.advIntervalLbl.text integerValue]];
+        newBeacon.distance = [NSNumber numberWithFloat:[self.selectedBeacon.distance floatValue]];
     }
     NSError *error = nil;
     // Save the object to persistent store

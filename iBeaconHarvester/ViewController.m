@@ -237,11 +237,11 @@
 -(void)populateBeaconNames{
     self.beaconDict = [[NSMutableDictionary alloc] init];
     for(int i = 0; i < [self.beacons count]; i++){
-        NSManagedObject *beacon = [self.beacons objectAtIndex:i];
+        IBeacon *beacon = [self.beacons objectAtIndex:i];
         NSString *key = [NSString stringWithFormat:@"%@--%@--%@",
-                         [beacon valueForKey:@"uuid"],
-                         [[beacon valueForKey:@"major"] stringValue],
-                         [[beacon valueForKey:@"minor"] stringValue]];
+                         beacon.uuid,
+                         [beacon.major stringValue],
+                         [beacon.minor stringValue]];
         [self.beaconDict setObject:[beacon valueForKey:@"name"] forKey:key];
     }
 }
