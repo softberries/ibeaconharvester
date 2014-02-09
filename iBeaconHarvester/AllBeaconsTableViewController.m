@@ -41,7 +41,7 @@
     [super viewDidAppear:animated];
     
     // Fetch the devices from persistent data store
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     NSLog(@"found beacons: %lu",(unsigned long)[self.beacons count]);
@@ -57,7 +57,7 @@
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete object from database
@@ -102,18 +102,6 @@
     [cell.beaconCellUUIDlbl setText:beacon.uuid];
     cell.beaconCellImg.image = [IconUtils findImageByDistance:distance];
     return cell;
-}
-
-#pragma mark - Core Data
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 #pragma mark - Seque handling

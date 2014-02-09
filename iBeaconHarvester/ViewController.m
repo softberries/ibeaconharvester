@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "IBeacon.h"
 #import "IconUtils.h"
+#import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 
 @interface ViewController ()<ESTBeaconManagerDelegate, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate>
@@ -85,7 +86,7 @@
 {
     [super viewDidAppear:animated];
     // Fetch the devices from persistent data store
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     [self populateBeaconNames];
@@ -139,19 +140,6 @@
 
 -(void) beaconManager:(ESTBeaconManager *)manager didDetermineState:(CLRegionState)state forRegion:(ESTBeaconRegion *)region{
     [manager startMonitoringForRegion:region];
-}
-
-
-#pragma mark - Core Data related methods
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 #pragma mark - Table related methods

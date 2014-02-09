@@ -240,7 +240,7 @@
 #pragma mark - Core Data
 
 -(IBeacon *)findIBeacon:(NSString *)uuid major:(int)major minor:(int)minor{
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uuid == %@ AND major == %d AND minor == %d", uuid, major, minor]];
     NSArray *beaconsFound = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -252,7 +252,7 @@
 }
 
 - (IBAction)save:(id)sender {
-    NSManagedObjectContext *context = [self managedObjectContext];
+    NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     IBeacon *bikon = [self findIBeacon:self.uuidLbl.text major:[self.majorNrLbl.text intValue] minor:[self.minorNrLbl.text intValue]];
     if(bikon){
         NSLog(@"saving existing object...");
@@ -287,15 +287,6 @@
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }
     [self.revealViewController revealToggleAnimated:YES];
-}
-
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 @end

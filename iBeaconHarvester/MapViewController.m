@@ -11,6 +11,7 @@
 #import "IBeaconAnnotation.h"
 #import "IBeacon.h"
 #import "BeaconDetailsViewController.h"
+#import "AppDelegate.h"
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 
@@ -30,7 +31,7 @@
     [super viewDidAppear:animated];
     
     // Fetch the devices from persistent data store
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     self.beacons = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     [self reloadData];
@@ -105,7 +106,7 @@
  Find iBeacon in the database when the annotation is clicked on the map.
  */
 -(IBeacon *)findIBeacon:(NSString *)uuid major:(int)major minor:(int)minor{
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"IBeacon"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uuid == %@ AND major == %d AND minor == %d", uuid, major, minor]];
     NSArray *beaconsFound = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -114,16 +115,6 @@
     }else{
         return nil;
     }
-}
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
 }
 
 #pragma mark - Segue handling
