@@ -26,7 +26,7 @@
     self.view.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.0f];
     self.tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:0.4f];
-    self.menuItems = @[@"Radar", @"Database", @"Map", @"About"];
+    self.menuItems = @[@"Radar", @"Database", @"Map", @"Settings", @"About"];
 }
 
 #pragma mark - Table view data source

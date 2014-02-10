@@ -141,6 +141,7 @@
 }
 /* called when the ibeacon given is from the database */
 -(void)displayIBeaconFromManager{
+    self.nameTxt.text = self.selectedBeacon.peripheral.name;
     self.uuidLbl.text = self.selectedBeacon.proximityUUID.UUIDString;
     self.majorNrLbl.text = [NSString stringWithFormat:@"%d",self.selectedBeacon.major.intValue];
     self.minorNrLbl.text = [NSString stringWithFormat:@"%d", self.selectedBeacon.minor.intValue];
@@ -269,7 +270,7 @@
         NSLog(@"saving new object...");
         IBeacon *newBeacon = [NSEntityDescription insertNewObjectForEntityForName:@"IBeacon" inManagedObjectContext:context];
         newBeacon.uuid = self.uuidLbl.text;
-        newBeacon.name = self.uuidLbl.text;
+        newBeacon.name = self.nameTxt.text;
         newBeacon.minor = [NSNumber numberWithInteger:[self.minorNrLbl.text integerValue]];
         newBeacon.major = [NSNumber numberWithInteger:[self.majorNrLbl.text integerValue]];
         newBeacon.latitude = [NSNumber numberWithDouble:self.latitude];
