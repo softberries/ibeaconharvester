@@ -11,6 +11,7 @@
 #import "UUIDTableViewCell.h"
 #import "UUIDItem.h"
 #import "AppDelegate.h"
+#import "IBHConstants.h"
 #import <CoreData/CoreData.h>
 
 @interface SettingsViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
@@ -20,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *notificationsSwitch;
 
 @property (retain) NSMutableArray *uuids;
-@property int selectedRow;
 @end
 
 @implementation SettingsViewController
@@ -52,6 +52,20 @@
     
     //init uuids array
     self.uuids = [[NSMutableArray alloc]init];
+    
+    //set up the checkbox for notification setting
+    [self.notificationsSwitch addTarget:self action:@selector(setNotificationsState:) forControlEvents:UIControlEventValueChanged];
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:kibh_settings_send_notifications]) {
+        [self.notificationsSwitch setOn:YES];
+    } else {
+        [self.notificationsSwitch setOn:NO];
+    }
+}
+
+- (void)setNotificationsState:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setBool:[sender isOn] forKey:kibh_settings_send_notifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,6 +76,21 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"UUIDItem"];
     self.uuids = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     NSLog(@"found uuidItems: %lu",(unsigned long)[self.uuids count]);
+    
+    if([self.uuids count] == 0){
+        NSLog(@"Creating new uuid");
+        //if no uuids were found add the estimote uuid by default
+        UUIDItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"UUIDItem" inManagedObjectContext:managedObjectContext];
+        item.name = kibh_estimote_name;
+        item.uuid = kibh_estimote_uuid;
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }else{
+            self.uuids = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+        }
+    }
     [self.uuidsTable reloadData];
 }
 
@@ -75,10 +104,13 @@
     [self.addButton setEnabled:NO];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (void)saveUUIDItemBeingEdited:(int)index cell:(UUIDTableViewCell *)cell{
     NSManagedObjectContext *context = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
-    NSLog(@"txt: %@",textField.text);
-    NSLog(@"row: %d",self.selectedRow);
+    
+    UUIDItem *item = [self.uuids objectAtIndex:index];
+    item.uuid = cell.uuidTxt.text;
+    item.name = cell.nameTxt.text;
+    
     NSError *error = nil;
     // Save the object to persistent store
     if (![context save:&error]) {
@@ -86,6 +118,11 @@
     }
     [self.view endEditing:YES];
     [self.addButton setEnabled:YES];
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    UUIDTableViewCell *cell =(UUIDTableViewCell *) textField.superview.superview.superview;
+    NSIndexPath *indexPath = [self.uuidsTable indexPathForCell:cell];
+    [self saveUUIDItemBeingEdited:indexPath.row cell:cell];
     return YES;
 }
 
@@ -117,15 +154,16 @@
     [cell.uuidTxt setDelegate:self];
     return cell;
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    UUIDTableViewCell *cell =(UUIDTableViewCell *) textField.superview.superview.superview;
+    NSIndexPath *indexPath = [self.uuidsTable indexPathForCell:cell];
+    [self saveUUIDItemBeingEdited:indexPath.row cell:cell];
+}
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
-}
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    _selectedRow = indexPath.row;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

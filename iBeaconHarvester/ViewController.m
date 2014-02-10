@@ -14,6 +14,8 @@
 #import "IBeacon.h"
 #import "IconUtils.h"
 #import "AppDelegate.h"
+#import "UUIDItem.h"
+#import "IBHConstants.h"
 #import <CoreData/CoreData.h>
 
 @interface ViewController ()<ESTBeaconManagerDelegate, UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate>
@@ -29,6 +31,8 @@
 @property (strong) NSMutableArray *dbBeacons;
 //all entities copied to dictionary for fast access
 @property (nonatomic) NSMutableDictionary *beaconDict;
+//all regions used
+@property (strong) NSMutableArray *regions;
 
 @end
 
@@ -45,16 +49,7 @@
     self.beaconManager.delegate = self;
     self.beaconManager.avoidUnknownStateBeacons = YES;
    
-    ESTBeaconRegion *region = [[ESTBeaconRegion alloc]
-                            initWithProximityUUID:[[NSUUID alloc]
-                            initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"]
-                            identifier:@"iBeaconHarvesterRegion"];
-    
-    // start looking for estimote beacons in region
-    // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
-    [self.beaconManager startRangingBeaconsInRegion:region];
-    [self.beaconManager requestStateForRegion:region];
-    
+    [self startListeningOnRegions];
     //register current class as delegate and data source for the table view
     [self.beaconsListTableView setDelegate:self];
     [self.beaconsListTableView setDataSource:self];
@@ -94,6 +89,39 @@
 
 #pragma mark - iBeacon related methods
 
+-(void)startListeningOnRegions{
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"UUIDItem"];
+    NSArray *uuids = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    NSLog(@"Regions found: %ld",(unsigned long)[uuids count]);
+    for(int i=0;i<[_regions count];i++){
+        [self.beaconManager stopRangingBeaconsInRegion:[_regions objectAtIndex:i]];
+    }
+    for(int i=0;i<[uuids count];i++){
+        UUIDItem *item = [uuids objectAtIndex:i];
+        NSLog(@"uuid is valid: %d",[self regionIsValid:item.uuid]);
+        if(item.name == nil || item.uuid == nil || ![self regionIsValid:item.uuid]){
+            continue;
+        }
+        ESTBeaconRegion *region = [[ESTBeaconRegion alloc]
+                                   initWithProximityUUID:[[NSUUID alloc]
+                                                          initWithUUIDString:item.uuid]
+                                   identifier:item.name];
+        
+        // start looking for estimote beacons in region
+        // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
+        [self.beaconManager startRangingBeaconsInRegion:region];
+        [self.beaconManager requestStateForRegion:region];
+        [self.regions addObject:region];
+    }
+}
+
+-(BOOL)regionIsValid:(NSString*)uuid{
+    NSString *regexString = @"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}";
+    NSRange guidValidationRange = [uuid rangeOfString:regexString options:NSRegularExpressionSearch];
+    return (guidValidationRange.location == 0 && guidValidationRange.length == uuid.length);
+}
+
 -(void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
 {
     self.beacons = beacons;
@@ -121,7 +149,7 @@
             self.notifications = [[NSMutableArray alloc]init];
         }
         NSLog(@"Name: %@",name);
-        if(name == NULL){
+        if(name == NULL && [[NSUserDefaults standardUserDefaults] boolForKey:kibh_settings_send_notifications]){
             NSString *newName = [NSString stringWithFormat:@"%@%@%@",closestBeacon.proximityUUID.UUIDString, closestBeacon.major, closestBeacon.minor];
             NSLog(@"isView shown: %d",self.isViewLoaded && self.view.window);
             if(![self.notifications containsObject:newName] && !(self.isViewLoaded && self.view.window.isHidden)){

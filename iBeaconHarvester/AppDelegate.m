@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "IBeacon.h"
 #import "ESTBeaconManager.h"
+#import "UUIDItem.h"
+#import "IBHConstants.h"
 
 @implementation AppDelegate
 
@@ -166,7 +168,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    //set up default settings if not yest set
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kibh_settings_send_notifications]==nil){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kibh_settings_send_notifications];
+    }
+    //set up estimote as default
+    NSManagedObjectContext *managedObjectContext = [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"UUIDItem"];
+    NSArray *uuids = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    if([uuids count] == 0){
+        //if no uuids were found add the estimote uuid by default
+        UUIDItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"UUIDItem" inManagedObjectContext:managedObjectContext];
+        item.name = kibh_estimote_name;
+        item.uuid = kibh_estimote_uuid;
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }
+    }
+
     return YES;
 }
 							

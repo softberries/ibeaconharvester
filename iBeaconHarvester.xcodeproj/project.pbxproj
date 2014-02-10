@@ -64,6 +64,7 @@
 		01547BC218A8E13C00329199 /* markerRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC118A8E13C00329199 /* markerRed.png */; };
 		01547BC418A8E3FB00329199 /* ibeaconharvester.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC318A8E3FB00329199 /* ibeaconharvester.png */; };
 		01547BC618A8E40D00329199 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC518A8E40D00329199 /* marker.png */; };
+		01547BC918A912A200329199 /* IBHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BC818A912A200329199 /* IBHConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,8 @@
 		01547BC118A8E13C00329199 /* markerRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markerRed.png; sourceTree = "<group>"; };
 		01547BC318A8E3FB00329199 /* ibeaconharvester.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibeaconharvester.png; sourceTree = "<group>"; };
 		01547BC518A8E40D00329199 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
+		01547BC718A912A200329199 /* IBHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBHConstants.h; sourceTree = "<group>"; };
+		01547BC818A912A200329199 /* IBHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBHConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,8 @@
 				01547A38189C35E600329199 /* Main.storyboard */,
 				01547A3E189C35E600329199 /* Images.xcassets */,
 				01547A2D189C35E600329199 /* Supporting Files */,
+				01547BC718A912A200329199 /* IBHConstants.h */,
+				01547BC818A912A200329199 /* IBHConstants.m */,
 			);
 			path = iBeaconHarvester;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				01547AEC18A060DA00329199 /* IBeaconAnnotation.m in Sources */,
 				01547BA118A7B77200329199 /* UUIDTableViewCell.m in Sources */,
 				01547A3D189C35E600329199 /* ViewController.m in Sources */,
+				01547BC918A912A200329199 /* IBHConstants.m in Sources */,
 				01547A7E189F99E200329199 /* BeaconListTableViewCell.m in Sources */,
 				01547A62189C3A4600329199 /* MenuTableCell.m in Sources */,
 				01547A70189CC88500329199 /* AllBeaconsTableViewController.m in Sources */,
