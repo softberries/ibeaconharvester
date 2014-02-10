@@ -32,7 +32,6 @@
 		01547A8F189FA43800329199 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A8E189FA43800329199 /* SystemConfiguration.framework */; };
 		01547A93189FAF3000329199 /* BeaconDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547A92189FAF3000329199 /* BeaconDetailsViewController.m */; };
 		01547A95189FC2A200329199 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547A94189FC2A200329199 /* marker.png */; };
-		01547A9A189FC54900329199 /* markerRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547A97189FC54900329199 /* markerRed.png */; };
 		01547A9D18A03BE400329199 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A9C18A03BE400329199 /* CoreData.framework */; };
 		01547AA418A03C3200329199 /* iBeaconHarvester.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01547AA218A03C3200329199 /* iBeaconHarvester.xcdatamodeld */; };
 		01547AEC18A060DA00329199 /* IBeaconAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547AEB18A060DA00329199 /* IBeaconAnnotation.m */; };
@@ -64,6 +63,7 @@
 		01547BBC18A8DE6C00329199 /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BBB18A8DE6C00329199 /* AppIcon.png */; };
 		01547BBE18A8E05600329199 /* My iBeacons.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BBD18A8E05600329199 /* My iBeacons.png */; };
 		01547BC018A8E06E00329199 /* Database.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BBF18A8E06E00329199 /* Database.png */; };
+		01547BC218A8E13C00329199 /* markerRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC118A8E13C00329199 /* markerRed.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +114,6 @@
 		01547A91189FAF3000329199 /* BeaconDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconDetailsViewController.h; sourceTree = "<group>"; };
 		01547A92189FAF3000329199 /* BeaconDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconDetailsViewController.m; sourceTree = "<group>"; };
 		01547A94189FC2A200329199 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marker.png; path = "../../../Downloads/smashing-freebies-smallicons-icon-set/64/PNG/@2x/marker.png"; sourceTree = "<group>"; };
-		01547A97189FC54900329199 /* markerRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = markerRed.png; path = "../../../Downloads/smashing-freebies-smallicons-icon-set/64/PNG/@2x/markerRed.png"; sourceTree = "<group>"; };
 		01547A9C18A03BE400329199 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		01547AA318A03C3200329199 /* iBeaconHarvester.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iBeaconHarvester.xcdatamodel; sourceTree = "<group>"; };
 		01547AEA18A060DA00329199 /* IBeaconAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBeaconAnnotation.h; sourceTree = "<group>"; };
@@ -160,6 +159,7 @@
 		01547BBB18A8DE6C00329199 /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
 		01547BBD18A8E05600329199 /* My iBeacons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "My iBeacons.png"; sourceTree = "<group>"; };
 		01547BBF18A8E06E00329199 /* Database.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Database.png; sourceTree = "<group>"; };
+		01547BC118A8E13C00329199 /* markerRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = markerRed.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +251,7 @@
 		01547A2D189C35E600329199 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01547BC118A8E13C00329199 /* markerRed.png */,
 				01547BBF18A8E06E00329199 /* Database.png */,
 				01547BBD18A8E05600329199 /* My iBeacons.png */,
 				01547BBB18A8DE6C00329199 /* AppIcon.png */,
@@ -269,7 +270,6 @@
 				01547AF418A0682B00329199 /* ibeaconharvester80.png */,
 				01547AF518A0682B00329199 /* ibeaconharvester120.png */,
 				01547AF118A0674000329199 /* ibeaconharvester.png */,
-				01547A97189FC54900329199 /* markerRed.png */,
 				01547A94189FC2A200329199 /* marker.png */,
 				01547A2E189C35E600329199 /* iBeaconHarvester-Info.plist */,
 				01547A2F189C35E600329199 /* InfoPlist.strings */,
@@ -493,6 +493,7 @@
 				01547B0118A06BB900329199 /* About.png in Resources */,
 				01547BB618A8DD7900329199 /* markerYellow.png in Resources */,
 				01547BB418A8DD6800329199 /* Radar.png in Resources */,
+				01547BC218A8E13C00329199 /* markerRed.png in Resources */,
 				01547B9D18A7B44300329199 /* label.png in Resources */,
 				01547B0418A06E6000329199 /* ibeaconharvester640.png in Resources */,
 				01547AF618A0682B00329199 /* ibeaconharvester58.png in Resources */,
@@ -501,7 +502,6 @@
 				01547B0518A06E6000329199 /* ibeaconharvester1136.png in Resources */,
 				01547BBA18A8DD9F00329199 /* markerPink.png in Resources */,
 				01547A31189C35E600329199 /* InfoPlist.strings in Resources */,
-				01547A9A189FC54900329199 /* markerRed.png in Resources */,
 				01547B9818A7ABD900329199 /* Settings.png in Resources */,
 				01547BB818A8DD8D00329199 /* Map.png in Resources */,
 				01547A3A189C35E600329199 /* Main.storyboard in Resources */,
