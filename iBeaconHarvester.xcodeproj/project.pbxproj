@@ -56,7 +56,6 @@
 		01547B0D18A17FE700329199 /* twitter_standing.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0C18A17FE700329199 /* twitter_standing.png */; };
 		01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0E18A3A52800329199 /* ViewControllerTestTests.m */; };
 		01547B1318A3AC7A00329199 /* IconUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B1218A3AC7A00329199 /* IconUtils.m */; };
-		01547B9618A5230600329199 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547B9518A5230600329199 /* libEstimoteSDK.a */; };
 		01547B9818A7ABD900329199 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B9718A7ABD900329199 /* Settings.png */; };
 		01547B9B18A7AD4D00329199 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B9A18A7AD4D00329199 /* SettingsViewController.m */; };
 		01547B9D18A7B44300329199 /* label.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B9C18A7B44300329199 /* label.png */; };
@@ -64,6 +63,7 @@
 		01547BAA18A7F13B00329199 /* IBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BA918A7F13B00329199 /* IBeacon.m */; };
 		01547BAD18A7F13C00329199 /* UUIDItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BAC18A7F13C00329199 /* UUIDItem.m */; };
 		01547BB118A8D63500329199 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BB018A8D63500329199 /* SWRevealViewController.m */; };
+		01547BB218A8D98000329199 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547B9518A5230600329199 /* libEstimoteSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,13 +167,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01547BB218A8D98000329199 /* libEstimoteSDK.a in Frameworks */,
 				01547A9D18A03BE400329199 /* CoreData.framework in Frameworks */,
 				01547A8F189FA43800329199 /* SystemConfiguration.framework in Frameworks */,
 				01547A8D189FA3F600329199 /* CoreBluetooth.framework in Frameworks */,
 				01547A8B189FA3DF00329199 /* CoreLocation.framework in Frameworks */,
 				01547A6A189C537400329199 /* MapKit.framework in Frameworks */,
 				01547A29189C35E600329199 /* CoreGraphics.framework in Frameworks */,
-				01547B9618A5230600329199 /* libEstimoteSDK.a in Frameworks */,
 				01547A2B189C35E600329199 /* UIKit.framework in Frameworks */,
 				01547A27189C35E600329199 /* Foundation.framework in Frameworks */,
 			);
