@@ -195,6 +195,7 @@
 		01547A1A189C35E600329199 = {
 			isa = PBXGroup;
 			children = (
+				01547BAE18A8D63500329199 /* SWRevealViewController */,
 				01547B8E18A5230600329199 /* EstimoteSDK */,
 				01547A2C189C35E600329199 /* iBeaconHarvester */,
 				01547A4B189C35E600329199 /* iBeaconHarvesterTests */,
@@ -360,7 +361,6 @@
 		01547B8E18A5230600329199 /* EstimoteSDK */ = {
 			isa = PBXGroup;
 			children = (
-				01547BAE18A8D63500329199 /* SWRevealViewController */,
 				01547B8F18A5230600329199 /* Headers */,
 				01547B9518A5230600329199 /* libEstimoteSDK.a */,
 			);
@@ -398,7 +398,8 @@
 				01547BAF18A8D63500329199 /* SWRevealViewController.h */,
 				01547BB018A8D63500329199 /* SWRevealViewController.m */,
 			);
-			path = SWRevealViewController;
+			name = SWRevealViewController;
+			path = EstimoteSDK/SWRevealViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
