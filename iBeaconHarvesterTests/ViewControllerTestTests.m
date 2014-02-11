@@ -42,13 +42,4 @@
     XCTAssertNotNil(self.vc, @"Test ViewControllerTest object not instantiated");
 }
 
-// This is just a sample test. Replace it with a real test.
-- (void)testThatMethodAReturns64 {
-
-    int expectedValue = 64;
-//    int returnValue = [self.vc ];
-//    XCTAssertTrue(returnValue == expectedValue,@"methodA returned %d but %d was expected.",returnValue,expectedValue);
-    
-}
-
 @end

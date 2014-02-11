@@ -53,7 +53,6 @@
 		01547BAA18A7F13B00329199 /* IBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BA918A7F13B00329199 /* IBeacon.m */; };
 		01547BAD18A7F13C00329199 /* UUIDItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BAC18A7F13C00329199 /* UUIDItem.m */; };
 		01547BB118A8D63500329199 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BB018A8D63500329199 /* SWRevealViewController.m */; };
-		01547BB218A8D98000329199 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547B9518A5230600329199 /* libEstimoteSDK.a */; };
 		01547BB418A8DD6800329199 /* Radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BB318A8DD6800329199 /* Radar.png */; };
 		01547BB618A8DD7900329199 /* markerYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BB518A8DD7900329199 /* markerYellow.png */; };
 		01547BB818A8DD8D00329199 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BB718A8DD8D00329199 /* Map.png */; };
@@ -65,6 +64,7 @@
 		01547BC418A8E3FB00329199 /* ibeaconharvester.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC318A8E3FB00329199 /* ibeaconharvester.png */; };
 		01547BC618A8E40D00329199 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547BC518A8E40D00329199 /* marker.png */; };
 		01547BC918A912A200329199 /* IBHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547BC818A912A200329199 /* IBHConstants.m */; };
+		52DA9CA40D0D449F8264D95B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F87C1EF516642A9A5A04498 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +108,6 @@
 		01547A6F189CC88500329199 /* AllBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllBeaconsTableViewController.m; sourceTree = "<group>"; };
 		01547A7C189F99E200329199 /* BeaconListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconListTableViewCell.h; sourceTree = "<group>"; };
 		01547A7D189F99E200329199 /* BeaconListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconListTableViewCell.m; sourceTree = "<group>"; };
-		01547A7F189F9F8400329199 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEstimoteSDK.a; path = "../iOS-SDK/EstimoteSDK/libEstimoteSDK.a"; sourceTree = "<group>"; };
 		01547A8A189FA3DF00329199 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		01547A8C189FA3F600329199 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		01547A8E189FA43800329199 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -133,12 +132,6 @@
 		01547B0E18A3A52800329199 /* ViewControllerTestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTestTests.m; sourceTree = "<group>"; };
 		01547B1118A3AC7A00329199 /* IconUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconUtils.h; sourceTree = "<group>"; };
 		01547B1218A3AC7A00329199 /* IconUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconUtils.m; sourceTree = "<group>"; };
-		01547B9018A5230600329199 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeacon.h; sourceTree = "<group>"; };
-		01547B9118A5230600329199 /* ESTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconDefinitions.h; sourceTree = "<group>"; };
-		01547B9218A5230600329199 /* ESTBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconManager.h; sourceTree = "<group>"; };
-		01547B9318A5230600329199 /* ESTBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconRegion.h; sourceTree = "<group>"; };
-		01547B9418A5230600329199 /* ESTBeaconUpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESTBeaconUpdateInfo.h; sourceTree = "<group>"; };
-		01547B9518A5230600329199 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEstimoteSDK.a; sourceTree = "<group>"; };
 		01547B9718A7ABD900329199 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
 		01547B9918A7AD4D00329199 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		01547B9A18A7AD4D00329199 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -163,6 +156,8 @@
 		01547BC518A8E40D00329199 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
 		01547BC718A912A200329199 /* IBHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBHConstants.h; sourceTree = "<group>"; };
 		01547BC818A912A200329199 /* IBHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBHConstants.m; sourceTree = "<group>"; };
+		3A1832153AED44E1A57FEC0C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		8F87C1EF516642A9A5A04498 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01547BB218A8D98000329199 /* libEstimoteSDK.a in Frameworks */,
 				01547A9D18A03BE400329199 /* CoreData.framework in Frameworks */,
 				01547A8F189FA43800329199 /* SystemConfiguration.framework in Frameworks */,
 				01547A8D189FA3F600329199 /* CoreBluetooth.framework in Frameworks */,
@@ -179,6 +173,7 @@
 				01547A29189C35E600329199 /* CoreGraphics.framework in Frameworks */,
 				01547A2B189C35E600329199 /* UIKit.framework in Frameworks */,
 				01547A27189C35E600329199 /* Foundation.framework in Frameworks */,
+				52DA9CA40D0D449F8264D95B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,11 +194,11 @@
 			isa = PBXGroup;
 			children = (
 				01547BAE18A8D63500329199 /* SWRevealViewController */,
-				01547B8E18A5230600329199 /* EstimoteSDK */,
 				01547A2C189C35E600329199 /* iBeaconHarvester */,
 				01547A4B189C35E600329199 /* iBeaconHarvesterTests */,
 				01547A25189C35E600329199 /* Frameworks */,
 				01547A24189C35E600329199 /* Products */,
+				3A1832153AED44E1A57FEC0C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,12 +218,12 @@
 				01547A8E189FA43800329199 /* SystemConfiguration.framework */,
 				01547A8C189FA3F600329199 /* CoreBluetooth.framework */,
 				01547A8A189FA3DF00329199 /* CoreLocation.framework */,
-				01547A7F189F9F8400329199 /* libEstimoteSDK.a */,
 				01547A69189C537400329199 /* MapKit.framework */,
 				01547A26189C35E600329199 /* Foundation.framework */,
 				01547A28189C35E600329199 /* CoreGraphics.framework */,
 				01547A2A189C35E600329199 /* UIKit.framework */,
 				01547A45189C35E600329199 /* XCTest.framework */,
+				8F87C1EF516642A9A5A04498 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -363,27 +358,6 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		01547B8E18A5230600329199 /* EstimoteSDK */ = {
-			isa = PBXGroup;
-			children = (
-				01547B8F18A5230600329199 /* Headers */,
-				01547B9518A5230600329199 /* libEstimoteSDK.a */,
-			);
-			path = EstimoteSDK;
-			sourceTree = "<group>";
-		};
-		01547B8F18A5230600329199 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				01547B9018A5230600329199 /* ESTBeacon.h */,
-				01547B9118A5230600329199 /* ESTBeaconDefinitions.h */,
-				01547B9218A5230600329199 /* ESTBeaconManager.h */,
-				01547B9318A5230600329199 /* ESTBeaconRegion.h */,
-				01547B9418A5230600329199 /* ESTBeaconUpdateInfo.h */,
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
 		01547B9E18A7B75400329199 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,9 +388,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01547A55189C35E600329199 /* Build configuration list for PBXNativeTarget "iBeaconHarvester" */;
 			buildPhases = (
+				C44A139B4DD1458DAC2D5494 /* Check Pods Manifest.lock */,
 				01547A1F189C35E600329199 /* Sources */,
 				01547A20189C35E600329199 /* Frameworks */,
 				01547A21189C35E600329199 /* Resources */,
+				7B91F136712F4DF1952A50BC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -526,6 +502,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B91F136712F4DF1952A50BC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C44A139B4DD1458DAC2D5494 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		01547A1F189C35E600329199 /* Sources */ = {
@@ -676,6 +685,7 @@
 		};
 		01547A56189C35E600329199 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A1832153AED44E1A57FEC0C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -695,6 +705,7 @@
 		};
 		01547A57189C35E600329199 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A1832153AED44E1A57FEC0C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

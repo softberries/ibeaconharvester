@@ -124,8 +124,7 @@
 
 -(void)beaconManager:(ESTBeaconManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(ESTBeaconRegion *)region
 {
-    self.beacons = beacons;
-    unsigned long size = [beacons count];
+    unsigned long size = [self.beacons count];
     NSString *noBStr = [NSString stringWithFormat:@"%lu", size];
     [self.nrOfBeaconsLbl setText:noBStr];
     [self.beaconsListTableView reloadData];
