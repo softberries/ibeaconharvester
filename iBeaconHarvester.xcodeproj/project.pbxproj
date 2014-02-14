@@ -44,7 +44,6 @@
 		01547B0918A0D39200329199 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0818A0D39200329199 /* MBProgressHUD.m */; };
 		01547B0B18A17F2200329199 /* www.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0A18A17F2200329199 /* www.png */; };
 		01547B0D18A17FE700329199 /* twitter_standing.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B0C18A17FE700329199 /* twitter_standing.png */; };
-		01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B0E18A3A52800329199 /* ViewControllerTestTests.m */; };
 		01547B1318A3AC7A00329199 /* IconUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B1218A3AC7A00329199 /* IconUtils.m */; };
 		01547B9818A7ABD900329199 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 01547B9718A7ABD900329199 /* Settings.png */; };
 		01547B9B18A7AD4D00329199 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01547B9A18A7AD4D00329199 /* SettingsViewController.m */; };
@@ -129,7 +128,6 @@
 		01547B0818A0D39200329199 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		01547B0A18A17F2200329199 /* www.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = www.png; sourceTree = "<group>"; };
 		01547B0C18A17FE700329199 /* twitter_standing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_standing.png; sourceTree = "<group>"; };
-		01547B0E18A3A52800329199 /* ViewControllerTestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerTestTests.m; sourceTree = "<group>"; };
 		01547B1118A3AC7A00329199 /* IconUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconUtils.h; sourceTree = "<group>"; };
 		01547B1218A3AC7A00329199 /* IconUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconUtils.m; sourceTree = "<group>"; };
 		01547B9718A7ABD900329199 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Settings.png; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 			children = (
 				01547A51189C35E600329199 /* iBeaconHarvesterTests.m */,
 				01547A4C189C35E600329199 /* Supporting Files */,
-				01547B0E18A3A52800329199 /* ViewControllerTestTests.m */,
 			);
 			path = iBeaconHarvesterTests;
 			sourceTree = "<group>";
@@ -568,7 +565,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01547B0F18A3A52800329199 /* ViewControllerTestTests.m in Sources */,
 				01547A52189C35E600329199 /* iBeaconHarvesterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

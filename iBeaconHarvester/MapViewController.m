@@ -55,6 +55,7 @@
  Puts all the iBeacons found in the database onto the mapview
  */
 - (void)reloadData {
+    NSMutableArray *annotations = [[NSMutableArray alloc] init];
     for (int i = 0; i < [self.beacons count]; i++) {
         IBeacon *beacon = [self.beacons objectAtIndex:(NSUInteger) i];
         double latitude = [[beacon valueForKey:@"latitude"] doubleValue];
@@ -74,8 +75,10 @@
                                                          major:[beacon.major intValue]
                                                          minor:[beacon.minor intValue]
                 ];
-        [self.mapView addAnnotation:annotation];
+        [annotations addObject:annotation];
     }
+    //add all annotations at once
+    [self.mapView addAnnotations:annotations];
 }
 
 #pragma mark - MapView handling
