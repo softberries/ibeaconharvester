@@ -13,7 +13,7 @@
 
 @interface BeaconDetailsViewController : UIViewController
 
-@property (nonatomic) ESTBeacon *selectedBeacon;
-@property (nonatomic) IBeacon *beaconFromDb;
+@property(nonatomic) ESTBeacon *selectedBeacon;
+@property(nonatomic) IBeacon *beaconFromDb;
 
 @end
