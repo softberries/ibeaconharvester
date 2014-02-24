@@ -99,7 +99,7 @@
     [self.addButton setEnabled:NO];
 }
 
-- (void)saveUUIDItemBeingEdited:(int)index cell:(UUIDTableViewCell *)cell {
+- (void)saveUUIDItemBeingEdited:(NSInteger)index cell:(UUIDTableViewCell *)cell {
     NSManagedObjectContext *context = [(AppDelegate *) [[UIApplication sharedApplication] delegate] managedObjectContext];
 
     UUIDItem *item = [self.uuids objectAtIndex:(NSUInteger) index];

@@ -13,4 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *beaconCellUUIDlbl;
 @property (weak, nonatomic) IBOutlet UILabel *beaconCellDistanceLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *beaconCellImg;
+@property (weak, nonatomic) IBOutlet UIProgressView *beaconCellRssi;
+@property (weak, nonatomic) IBOutlet UILabel *beaconCellMajorLbl;
+@property (weak, nonatomic) IBOutlet UILabel *beaconCellMinorLbl;
 @end

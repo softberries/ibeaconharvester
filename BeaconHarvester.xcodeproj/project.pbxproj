@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010FA77918B407F800B2E73F /* mapbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 010FA77818B407F800B2E73F /* mapbackground.png */; };
 		01547A27189C35E600329199 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A26189C35E600329199 /* Foundation.framework */; };
 		01547A29189C35E600329199 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A28189C35E600329199 /* CoreGraphics.framework */; };
 		01547A2B189C35E600329199 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01547A2A189C35E600329199 /* UIKit.framework */; };
@@ -77,6 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010FA77818B407F800B2E73F /* mapbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapbackground.png; sourceTree = "<group>"; };
 		01547A23189C35E600329199 /* BeaconHarvester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconHarvester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01547A26189C35E600329199 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01547A28189C35E600329199 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -249,6 +251,7 @@
 		01547A2D189C35E600329199 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				010FA77818B407F800B2E73F /* mapbackground.png */,
 				01547BC518A8E40D00329199 /* marker.png */,
 				01547BC318A8E3FB00329199 /* ibeaconharvester.png */,
 				01547BC118A8E13C00329199 /* markerRed.png */,
@@ -474,6 +477,7 @@
 				01547BC218A8E13C00329199 /* markerRed.png in Resources */,
 				01547B9D18A7B44300329199 /* label.png in Resources */,
 				01547B0418A06E6000329199 /* ibeaconharvester640.png in Resources */,
+				010FA77918B407F800B2E73F /* mapbackground.png in Resources */,
 				01547AF618A0682B00329199 /* ibeaconharvester58.png in Resources */,
 				01547A3F189C35E600329199 /* Images.xcassets in Resources */,
 				01547BC418A8E3FB00329199 /* ibeaconharvester.png in Resources */,

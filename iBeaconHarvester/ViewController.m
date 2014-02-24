@@ -192,9 +192,14 @@
         if (name != nil) {
             cell.beaconCellNameLbl.text = name;
         }
-        cell.beaconCellUUIDlbl.text = @"Unknown";
         cell.beaconCellDistanceLbl.text = [NSString stringWithFormat:@"%.02f m", distance];
         cell.beaconCellUUIDlbl.text = closestBeacon.proximityUUID.UUIDString;
+        cell.beaconCellMajorLbl.text = [closestBeacon.major stringValue];
+        cell.beaconCellMinorLbl.text = [closestBeacon.minor stringValue];
+        NSNumber *rssi = [NSNumber numberWithFloat:[closestBeacon  rssi] + 100];
+        if(rssi > 0){
+            cell.beaconCellRssi.progress = [rssi floatValue]/100;
+        }
     }
     return cell;
 }
